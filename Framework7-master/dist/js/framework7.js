@@ -1721,6 +1721,11 @@
                 // Radios/checkboxes
                 if (clicked.hasClass('label-checkbox') || clicked.hasClass('label-radio')) {
                     var input = clicked.find('input');
+                    //Location Data Puller
+                    // if (page.name === 'locations') {
+                    var locat = input.attr('id');
+                    setCookie("loc",locat,30);
+                    // };
                     if (input.attr('type') === 'checkbox') {
                         if (input[0].checked === true) input[0].checked = false;
                         else input[0].checked = true;
