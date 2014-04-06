@@ -7,6 +7,37 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+// Expose Internal DOM library
+var $$ = myApp.$;
+
+// Events for specific pages when it initialized
+$$(document).on('pageInit', function (e) {
+    var page = e.detail.page;
+    // Handle Modals Page event when it is init
+        $$('.demo-alert').tap(function () {
+            myApp.alert('Hello!');
+        });
+        $$('.demo-confirm').tap(function () {
+            myApp.confirm('Are you feel good today?', function () {
+                myApp.alert('Great!');
+            });
+        });
+        $$('.login-prompt').tap(function () {
+            myApp.prompt('What is your name?', function (data) {
+                // @data contains input value
+                var name = data;
+                var phonenum;
+                myApp.prompt('And number?', function(data) {phonenum=data;});
+            });
+        });
+
+});
+
+// Required for demo popover
+$$('.popover a').tap(function () {
+    myApp.closeModal('.popover');
+});
+
 // Generate dynamic page
 var dynamicPageIndex = 0;
 function createContentPage(){
@@ -35,3 +66,4 @@ function createContentPage(){
     );
 	return;
 }
+
